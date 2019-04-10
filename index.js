@@ -40,10 +40,10 @@ createJetpack = function() {
         document.getElementById('jetpacks').innerHTML = html;
     });
 };
-hideElement = function(x) {
-    if (x.style.display === "none") {
-        x.style.display = "block";
-    } else {
-        x.style.display = "none";
-    }
+hideElement = function(id) {
+    document.getElementById(id).style.display = "none";
+};
+
+showElement = function(id) {
+    document.getElementById(id).style.display = "block";
 };
