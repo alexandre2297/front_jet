@@ -10,7 +10,7 @@
   "videosFolder":         "tests/ui/videos",
   "watchForFileChanges":  false,
   "chromeWebSecurity": false,
-  "defaultCommandTimeout": 60000,
-  "requestTimeout": 60000,
-  "responseTimeout": 60000
+  "defaultCommandTimeout": 5000,
+  "requestTimeout": 5000,
+  "responseTimeout": 5000
 }

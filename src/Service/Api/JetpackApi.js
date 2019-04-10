@@ -16,4 +16,14 @@ module.exports = class  {
             });
         });
     }
+
+    createJetPack(){
+        return this.httpClient.fetch('/jetpacks', {method: 'POST'}).then(row => {
+                let jetpack = new JetpackApi();
+                jetpack.id = row.id;
+                jetpack.name = row.name;
+                jetpack.image = row.image;
+                return jetpack
+        });
+    }
 };
