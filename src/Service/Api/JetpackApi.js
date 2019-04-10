@@ -1,4 +1,4 @@
-const JetpackApi = require('../../Entity/Jetpack');
+const Jetpack = require('../../Entity/Jetpack');
 module.exports = class  {
     constructor(httpClient) {
         this.httpClient = httpClient;
@@ -8,10 +8,11 @@ module.exports = class  {
         return this.httpClient.fetch('/jetpacks', {}).then(rows => {
 
             return rows.map(row => {
-                let jetpack = new JetpackApi();
-                jetpack.id = row.id;
-                jetpack.name = row.name
-                jetpack.image = row.image;
+                let jetpack = new Jetpack();
+                jetpack.id      = row.id;
+                jetpack.name    = row.name;
+                jetpack.image   = row.image;
+
                 return jetpack
             });
         });
@@ -19,10 +20,11 @@ module.exports = class  {
 
     createJetPack(){
         return this.httpClient.fetch('/jetpacks', {method: 'POST'}).then(row => {
-                let jetpack = new JetpackApi();
-                jetpack.id = row.id;
-                jetpack.name = row.name;
-                jetpack.image = row.image;
+                let jetpack = new Jetpack();
+                jetpack.id      = row.id;
+                jetpack.name    = row.name;
+                jetpack.image   = row.image;
+
                 return jetpack
         });
     }
