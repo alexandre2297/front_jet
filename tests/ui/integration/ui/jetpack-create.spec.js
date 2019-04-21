@@ -6,7 +6,6 @@ context('Jetpack features', () => {
     })
 
     it('Create a new Jetpack', () => {
-        cy.contains('Ajouter').click();
         cy.get('#name').should('be.visible');
         cy.get('#image').should('be.visible');
         cy.get('#name').type('le jetpack de ouf');
