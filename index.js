@@ -14,7 +14,11 @@ jetpackService.getJetpacks().then(jetpacks => {
             '  <img src="'+ jetpack.image +'" class="card-img-top" alt="...">\n' +
             '  <div class="card-body">\n' +
             '    <h5 class="card-title">' + jetpack.name + '</h5>\n' +
-            '    <a href="#" class="btn btn-primary">Edit</a>\n' +
+                '<div id="jetpack-form-edit-'+jetpack.id+'">' +
+               '<label for="name"></label><input type="text" name="name" id="name-modify" />' +
+                '<label for="image"></label><input type="text" name="image" id="image-modify" />' +
+                '<button onclick="editJetpack()">Edit</button>' +
+            '</div>' +
             '  </div>\n' +
             '</div>'
 
