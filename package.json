@@ -25,7 +25,7 @@
     "mountebank.start": "mb --logfile=./tmp/mb.log --pidfile=./tmp/mb.pid --configfile=tests/mock/imposters.ejs --allowInjection --loglevel=debug",
     "mountebank.start.ci": "mb --logfile=./tmp/mb.log --pidfile=./tmp/mb.pid --configfile=tests/mock/imposters.ejs --allowInjection --loglevel=debug > ./tmp/mb.log &",
     "ui.test": "cypress run",
-    "lib" : "apt-get install xvfb libgtk2.0-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2",
+    "lib" : "sudo apt-get install xvfb libgtk2.0-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2",
     "ui.open": "cypress open"
   },
   "jest": {
