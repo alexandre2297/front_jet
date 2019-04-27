@@ -34,4 +34,24 @@ module.exports = class  {
             return jetpack
         });
     }
+
+    searchJetpack(startDate, endDate){
+        return this.httpClient.fetch('/jetpacks/search',
+            {
+                method: 'POST',
+                body: JSON.stringify({startDate: startDate, endDate: endDate})
+            }
+
+        ).then(rows => {
+            return rows.map(row => {
+                let jetpack = new Jetpack();
+                jetpack.id      = row.id;
+                jetpack.name    = row.name;
+                jetpack.image   = row.image;
+
+                return jetpack
+            });
+        });
+    }
+
 };

@@ -30,12 +30,35 @@ createJetpack = function() {
     document.getElementById('image').value ='';
 };
 
+search = function() {
+    jetpackService.searchJetpack(
+        document.getElementById('startDate').value,
+        document.getElementById('endDate').value,
+    ).then(jetpacks => {
+        document.getElementById('jetpacks').innerHTML = "";
+        jetpacks.forEach((jetpack) => {
+            document.getElementById('jetpacks').innerHTML += getJetPackHtml(jetpack.id, jetpack.name, jetpack.image);
+            showElement("reserve_" + jetpack.id)
+        });
+    });
+};
+
 hideElement = function(id) {
-    document.getElementById(id).className = "invisible";
+    const classElement = document.getElementById(id).className;
+
+    if (~classElement.indexOf("invisible")) return;
+    if (~classElement.indexOf("visible")) {
+        document.getElementById(id).className = classElement.replace("visible", "invisible")
+    }else{
+        document.getElementById(id).className += "invisble"
+    }
 };
 
 showElement = function(id) {
-    document.getElementById(id).className = "visible";
+    const classElement = document.getElementById(id).className;
+    if (~classElement.indexOf("invisible")){
+        document.getElementById(id).className = classElement.replace("invisible", "visible")
+    }
 };
 
 getJetPackHtml = function(id,name, image) {
@@ -44,6 +67,7 @@ getJetPackHtml = function(id,name, image) {
         '  <div class="card-body">\n' +
         '    <h5 class="card-title">' + name + '</h5>\n' +
         '    <a href="#" class="btn btn-primary">Edit</a>\n' +
+        '    <a href="#" id="reserve_' + id + '" class="invisible btn btn-success"">Reserve</a>\n' +
         '  </div>\n' +
         '</div>';
 };
