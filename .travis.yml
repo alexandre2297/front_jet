@@ -5,7 +5,7 @@ node_js:
 before_install:
   - sudo apt-get update
   - sudo apt -y install libgconf2.4
-  - npm install
+  - npm ci
   - npm run build
   - npm run start.ci
   - npm run mountebank.start.ci
