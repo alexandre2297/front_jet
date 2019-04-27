@@ -12,11 +12,11 @@
     <div class="container">
         <div class="card" style="width: 18rem;">
             <div class="card-body">
-                <button type="button" class="btn btn-success btn-lg" >Ajouter</button>
+                <button type="button" onclick="showElement('jetpack-form')" class="btn btn-success btn-lg" >Ajouter</button>
             </div>
         </div>
     </div>
-<div id="jetpack-form">
+<div class="invisible" id="jetpack-form">
     <label for="name"></label><input type="text" name="name" id="name"/>
     <label for="image"></label><input type="text" name="image" id="image"/>
     <button onclick="createJetpack()">Confirmer</button>

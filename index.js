@@ -9,41 +9,41 @@ const jetpackService = new JetpackService(httpClient);
 jetpackService.getJetpacks().then(jetpacks => {
     let html =  '';
     jetpacks.forEach((jetpack) => {
-        html +=
-            '<div class="card" style="width: 18rem;">\n' +
-            '  <img src="'+ jetpack.image +'" class="card-img-top" alt="...">\n' +
-            '  <div class="card-body">\n' +
-            '    <h5 class="card-title">' + jetpack.name + '</h5>\n' +
-            '    <a href="#" class="btn btn-primary">Edit</a>\n' +
-            '  </div>\n' +
-            '</div>'
-
+        html += getJetPackHtml(jetpack.id, jetpack.name, jetpack.image);
     });
 
     document.getElementById('jetpacks').innerHTML = html;
 });
+
 createJetpack = function() {
     jetpackService.createJetPack(
-        document.getElementById('name'),
-        document.getElementById('image'),
+        document.getElementById('name').value,
+        document.getElementById('image').value,
     ).then(jetpack => {
         let html = document.getElementById('jetpacks').innerHTML;
-         html +=
-            '<div class="card" style="width: 18rem;">\n' +
-            '  <img src="'+ jetpack.image +'" class="card-img-top" alt="...">\n' +
-            '  <div class="card-body">\n' +
-            '    <h5 class="card-title">' + jetpack.name + '</h5>\n' +
-            '    <a href="#" class="btn btn-primary">Edit</a>\n' +
-            '  </div>\n' +
-            '</div>';
+        html += getJetPackHtml(jetpack.id, jetpack.name, jetpack.image);
 
         document.getElementById('jetpacks').innerHTML = html;
     });
+    hideElement('jetpack-form');
+    document.getElementById('name').value = '';
+    document.getElementById('image').value ='';
 };
+
 hideElement = function(id) {
-    document.getElementById(id).style.display = "none";
+    document.getElementById(id).className = "invisible";
 };
 
 showElement = function(id) {
-    document.getElementById(id).style.display = "block";
+    document.getElementById(id).className = "visible";
+};
+
+getJetPackHtml = function(id,name, image) {
+    return  '<div class="card" style="width: 18rem;">\n' +
+        '  <img src="'+ image +'" class="card-img-top" alt="...">\n' +
+        '  <div class="card-body">\n' +
+        '    <h5 class="card-title">' + name + '</h5>\n' +
+        '    <a href="#" class="btn btn-primary">Edit</a>\n' +
+        '  </div>\n' +
+        '</div>';
 };
