@@ -25,7 +25,6 @@
     "mountebank.start": "mb --logfile=./tmp/mb.log --pidfile=./tmp/mb.pid --configfile=tests/mock/imposters.ejs --allowInjection --loglevel=debug",
     "mountebank.start.ci": "mb --logfile=./tmp/mb.log --pidfile=./tmp/mb.pid --configfile=tests/mock/imposters.ejs --allowInjection --loglevel=debug > ./tmp/mb.log &",
     "ui.test": "cypress run",
-    "lib" : "sudo apt-get install xvfb libgconf-2-4",
     "ui.open": "cypress open"
   },
   "jest": {
