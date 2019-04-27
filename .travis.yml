@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "node"
+  - 10
 cache:
   # Caches $HOME/.npm when npm ci is default script command
   # Caches node_modules in all other cases
@@ -21,4 +21,4 @@ install:
 script:
   - npm run unit.test.coverage
   - npm run unit.test.mutation
-  - npm run ui.test
+  - $(npm bin)/cypress run --record
