@@ -41,12 +41,35 @@ editJetpack = function (id) {
     });
 }
 
+search = function() {
+    jetpackService.searchJetpack(
+        document.getElementById('startDate').value,
+        document.getElementById('endDate').value,
+    ).then(jetpacks => {
+        document.getElementById('jetpacks').innerHTML = "";
+        jetpacks.forEach((jetpack) => {
+            document.getElementById('jetpacks').innerHTML += getJetPackHtml(jetpack.id, jetpack.name, jetpack.image);
+            showElement("reserve_" + jetpack.id)
+        });
+    });
+};
+
 hideElement = function(id) {
-    document.getElementById(id).className = "invisible";
+    const classElement = document.getElementById(id).className;
+
+    if (~classElement.indexOf("invisible")) return;
+    if (~classElement.indexOf("visible")) {
+        document.getElementById(id).className = classElement.replace("visible", "invisible")
+    }else{
+        document.getElementById(id).className += "invisble"
+    }
 };
 
 showElement = function(id) {
-    document.getElementById(id).className = "visible";
+    const classElement = document.getElementById(id).className;
+    if (~classElement.indexOf("invisible")){
+        document.getElementById(id).className = classElement.replace("invisible", "visible")
+    }
 };
 
 getJetPackHtml = function(id,name, image) {
@@ -60,5 +83,5 @@ getJetPackHtml = function(id,name, image) {
         '<button id ="edit-' + id + '" onclick="editJetpack(' + id.toString() + ')">Edit</button>' +
         '</div>' +
         '  </div>\n' +
-        '</div>'
+        '</div>';
 };
