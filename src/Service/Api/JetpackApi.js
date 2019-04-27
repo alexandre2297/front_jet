@@ -18,14 +18,20 @@ module.exports = class  {
         });
     }
 
-    createJetPack(){
-        return this.httpClient.fetch('/jetpacks', {method: 'POST'}).then(row => {
-                let jetpack = new Jetpack();
-                jetpack.id      = row.id;
-                jetpack.name    = row.name;
-                jetpack.image   = row.image;
+    createJetPack(name, image){
+        return this.httpClient.fetch('/jetpacks',
+            {
+                method: 'POST',
+                body: JSON.stringify({name: name, image: image})
+            }
 
-                return jetpack
+        ).then(row => {
+            let jetpack = new Jetpack();
+            jetpack.id      = row.id;
+            jetpack.name    = row.name;
+            jetpack.image   = row.image;
+
+            return jetpack
         });
     }
 
