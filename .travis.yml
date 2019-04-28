@@ -14,5 +14,10 @@ before_install:
 
 install:
   - npm ci
+  - npm run build
+  - npm run start.ci
+  - npm run mountebank.start.ci
 script:
-  - $(npm bin)/cypress run --record
+  - npm run unit.test.coverage
+  - npm run unit.test.mutation
+  - npm run ui.test
