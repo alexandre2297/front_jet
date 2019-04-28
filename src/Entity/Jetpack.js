@@ -3,6 +3,7 @@ module.exports = class  {
         this._id     = null;
         this._name   = null;
         this._image  = null;
+        this.bookings = [];
     }
 
     get id() {
@@ -27,5 +28,9 @@ module.exports = class  {
 
     set image(value) {
         this._image = value;
+    }
+
+    addBooking(startDate, endDate){
+        this.bookings.push([startDate, endDate]);
     }
 };
