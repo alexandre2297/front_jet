@@ -1,14 +1,14 @@
 language: node_js
 node_js:
-  - "node"
-
-before_install:
-  - npm install
-  - npm run build
-  - npm run start.ci
-  - npm run mountebank.start.ci
-
+  - 10
+cache:
+  # Caches $HOME/.npm when npm ci is default script command
+  # Caches node_modules in all other cases
+  npm: true
+  directories:
+    # we also need to cache folder with Cypress binary
+    - ~/.cache
+install:
+  - npm ci
 script:
-  - npm run unit.test.coverage
-  - npm run unit.test.mutation
-  - npm run ui.test
+  - $(npm bin)/cypress run --record
