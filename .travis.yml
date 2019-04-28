@@ -3,7 +3,7 @@ node_js:
   - "node"
 
 before_install:
-  - npm install
+  - npm install --save-dev cypress
   - npm run build
   - npm run start.ci
   - npm run mountebank.start.ci
