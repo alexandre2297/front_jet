@@ -12,10 +12,22 @@ jetpackService.getJetpacks().then(jetpacks => {
         html += getJetPackHtml(jetpack.id, jetpack.name, jetpack.image);
     });
 
-    document.getElementById('jetpacks').innerHTML = html;
+    if(document.getElementById('jetpacks') !== null)
+        document.getElementById('jetpacks').innerHTML = html;
 });
 
 createJetpack = function() {
+    console.log(    jetpackService.createJetPack(
+        document.getElementById('name').value,
+        document.getElementById('image').value,
+    ));
+
+    console.log( jetpackService.createJetPack(
+        document.getElementById('name').value,
+        document.getElementById('image').value,
+    ).toArray());
+
+
     jetpackService.createJetPack(
         document.getElementById('name').value,
         document.getElementById('image').value,
@@ -31,16 +43,38 @@ createJetpack = function() {
 };
 
 search = function() {
-    jetpackService.searchJetpack(
-        document.getElementById('startDate').value,
-        document.getElementById('endDate').value,
-    ).then(jetpacks => {
-        document.getElementById('jetpacks').innerHTML = "";
-        jetpacks.forEach((jetpack) => {
-            document.getElementById('jetpacks').innerHTML += getJetPackHtml(jetpack.id, jetpack.name, jetpack.image);
-            showElement("reserve_" + jetpack.id)
-        });
-    });
+    const startDate = document.getElementById('startDate').value;
+    const endDate = document.getElementById('endDate').value;
+    const validStartDate = ~isValidDate(startDate);
+    const validEndDate   = ~isValidDate(endDate);
+
+    let backgroundColorStartDate="white";
+    let backgroundColorEndDate="white";
+
+    if (validStartDate && validEndDate){
+        if(isValidDates(startDate, endDate)) {
+            jetpackService.searchJetpack(startDate, endDate).then(jetpacks => {
+                document.getElementById('jetpacks Available').innerHTML = "";
+                jetpacks.forEach((jetpack) => {
+                    document.getElementById('jetpacks Available').innerHTML += getJetPackHtml(jetpack.id, jetpack.name, jetpack.image);
+                    showElement("reserve_" + jetpack.id)
+                });
+            });
+        }else{
+            backgroundColorStartDate = "red";
+            backgroundColorEndDate = "red";
+        }
+    }else {
+        if (!validStartDate) {
+            backgroundColorStartDate = "red";
+        }
+        if (!validEndDate){
+            backgroundColorEndDate = "red";
+        }
+    }
+
+    document.getElementById('startDate').style.backgroundColor = backgroundColorStartDate;
+    document.getElementById('endDate').style.backgroundColor = backgroundColorEndDate;
 };
 
 hideElement = function(id) {
@@ -70,4 +104,17 @@ getJetPackHtml = function(id,name, image) {
         '    <a href="#" id="reserve_' + id + '" class="invisible btn btn-success"">Reserve</a>\n' +
         '  </div>\n' +
         '</div>';
+};
+
+isValidDate = function (date) {
+    const regex = "^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$";
+    return date.search(regex);
+};
+
+isValidDates = function (startDate, endDate) {
+    const today  = new Date();
+    const startD = new Date(startDate);
+    const endD   = new Date(endDate);
+
+    return startD >= today && startD <= endD;
 };
