@@ -8,6 +8,10 @@ cache:
   directories:
     # we also need to cache folder with Cypress binary
     - ~/.cache
+before_install:
+  - sudo apt-get update
+  - sudo apt -y install libgconf2-4
+
 install:
   - npm ci
 script:
