@@ -29,7 +29,7 @@ module.exports = class  {
         });
     }
 
-    EditJetPack() {
+    editJetPack() {
         return this.httpClient.fetch('/jetpacks', { method: 'POST' }).then(row => {
             let jetpack = new Jetpack();
             jetpack.id = row.id;
