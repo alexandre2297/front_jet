@@ -57,4 +57,31 @@ describe('JetpackApi features', function () {
             fail(e)
         });
     })
+
+    test('Test Edit Jetpack',() =>{
+        let httpClientMock = {
+            fetch: jest.fn()
+        };
+
+        httpClientMock.fetch.mockResolvedValue(
+            {
+                id: "a8019ec0-bfdc-4140-9dbb-4927e5ef5c8d",
+                name: "le jetpack de oufff2",
+                image: "base64..."
+            }
+        );
+
+        expect.assertions(4);
+
+        let jetpackApi = new JetpackApi(httpClientMock);
+        jetpackApi.editJetPack('x','y').then(
+            function (resp) {
+                expect(resp.id).toBe("a8019ec0-bfdc-4140-9dbb-4927e5ef5c8d");
+                expect(resp.name).toBe("le jetpack de oufff2");
+                expect(resp.image).toBe("base64...");
+                expect(resp).toBeInstanceOf(Jetpack);
+            }).catch((e) => {
+            fail(e)
+        });
+    })
 });

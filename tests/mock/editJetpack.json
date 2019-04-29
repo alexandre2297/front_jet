@@ -1,0 +1,27 @@
+{
+    "predicates": [
+        {
+            "equals": {
+                "method": "POST",
+                "path": "/jetpacks/edit"
+            }
+        },
+        {
+            "matches": {}
+        }
+    ],
+    "responses": [
+        {
+            "is": {
+                "headers": {
+                    "Access-Control-Allow-Origin": "*"
+                },
+                "body": {
+                    "id": "1",
+                    "name": "le jetpack de oufff2",
+                    "image":"https://gamewave.fr/static/images/news/headers/2600a-jetpack.jpg"
+                 }
+            }
+        }
+    ]
+}
