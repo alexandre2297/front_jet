@@ -8,8 +8,10 @@ describe('Jetpack  Constructor', function () {
         expect(jetpack.id).not.toBe(undefined);
         expect(jetpack.name).not.toBe(undefined);
         expect(jetpack.image).not.toBe(undefined);
+        expect(jetpack.booking).not.toBe(undefined);
         expect(jetpack.id).toBeNull();
         expect(jetpack.name).toBeNull();
         expect(jetpack.image).toBeNull();
+        expect(jetpack.booking).toBeNull();
     });
 });
