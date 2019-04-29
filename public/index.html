@@ -14,7 +14,6 @@
     <div class="card" style="width: 18rem;">
         <div class="card-body">
             <button type="button" onclick="showElement('jetpack-form')" class="btn btn-success btn-lg" >Ajouter</button>
-            <button type="button" onclick="window.location.href = 'book.html';" class="btn btn-success btn-lg" >Réserver</button>
         </div>
     </div>
 </div>
@@ -22,6 +21,15 @@
     <label for="name">Name :</label><input type="text" name="name" id="name"/>
     <label for="image">Image :</label><input type="text" name="image" id="image"/>
     <button onclick="createJetpack()">Confirmer</button>
+</div>
+<h2>Book jetpack</h2>
+<div class="input-group format-date">
+    <label for="startDate">From :</label><input type="date" name="startDate" id="startDate" class="form-control-sm hide-replaced"/>
+    <label for="startEnd">To :</label><input type="date" name="endDate" id="endDate" class="form-control-sm hide-replaced"/>
+    <button type="button" onclick="search()" class="visible">Rechercher</button>
+</div>
+<div class="container" id="jetpacksAvailable">
+
 </div>
 </body>
 <script type="text/javascript" src="dist/bundle.js"></script>
