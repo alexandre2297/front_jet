@@ -59,6 +59,7 @@ module.exports = class  {
                 jetpack.id      = row.id;
                 jetpack.name    = row.name;
                 jetpack.image   = row.image;
+                jetpack.bookings = row.bookings;
 
                 return jetpack
             });

@@ -9,7 +9,7 @@ const jetpackService = new JetpackService(httpClient);
 jetpackService.getJetpacks().then(jetpacks => {
     let html =  '';
     jetpacks.forEach((jetpack) => {
-        html += getJetPackHtml(jetpack.id, jetpack.name, jetpack.image);
+        html += getJetPackHtml(jetpack.id, jetpack.name, jetpack.image, false, true);
     });
 
     if(document.getElementById('jetpacks') !== null)
@@ -17,23 +17,12 @@ jetpackService.getJetpacks().then(jetpacks => {
 });
 
 createJetpack = function() {
-    console.log(    jetpackService.createJetPack(
-        document.getElementById('name').value,
-        document.getElementById('image').value,
-    ));
-
-    console.log( jetpackService.createJetPack(
-        document.getElementById('name').value,
-        document.getElementById('image').value,
-    ).toArray());
-
-
     jetpackService.createJetPack(
         document.getElementById('name').value,
         document.getElementById('image').value,
     ).then(jetpack => {
         let html = document.getElementById('jetpacks').innerHTML;
-        html += getJetPackHtml(jetpack.id, jetpack.name, jetpack.image);
+        html += getJetPackHtml(jetpack.id, jetpack.name, jetpack.image, false, true);
 
         document.getElementById('jetpacks').innerHTML = html;
     });
@@ -41,7 +30,6 @@ createJetpack = function() {
     document.getElementById('name').value = '';
     document.getElementById('image').value ='';
 };
-
 
 editJetpack = function (id) {
     jetpackService.editJetPack(id,
@@ -65,10 +53,11 @@ search = function() {
     if (validStartDate && validEndDate){
         if(isValidDates(startDate, endDate)) {
             jetpackService.searchJetpack(startDate, endDate).then(jetpacks => {
-                document.getElementById('jetpacks Available').innerHTML = "";
+                document.getElementById('jetpacksAvailable').innerHTML = "";
                 jetpacks.forEach((jetpack) => {
-                    document.getElementById('jetpacks Available').innerHTML += getJetPackHtml(jetpack.id, jetpack.name, jetpack.image);
-                    showElement("reserve_" + jetpack.id)
+                    document.getElementById('jetpacksAvailable').innerHTML +=
+                        getJetPackHtml(jetpack.id, jetpack.name, jetpack.image, true, false)
+                        /*+  getReservationsHtml(jetpack)*/;
                 });
             });
         }else{
@@ -106,18 +95,35 @@ showElement = function(id) {
     }
 };
 
-getJetPackHtml = function(id,name, image) {
-    return    '<div class="card-' + id + '" style="width: 18rem;">\n' +
+getJetPackHtml = function(id,name, image, withBookButton, withEditButton) {
+    let html =   '<div class="card-' + id + '" style="width: 18rem;">\n' +
         '  <img id="img-' + id + '" src="' + image + '" class="card-img-top" alt="...">\n' +
         '  <div class="card-body">\n' +
         '    <h5 id="card-title-' + id + '" class="card-title">' + name + '</h5>\n' +
         '<div id="' + id + '">' +
         '<label for="name"></label><input type="text" name="name" id="name-modify-' + id + '" />' +
         '<label for="image"></label><input type="text" name="image" id="image-modify-' + id + '" />' +
-        '<button id ="edit-' + id + '" onclick="editJetpack(' + id.toString() + ')">Edit</button>' +
+
+    if (withEditButton){
+        html +=  '           \'<button id ="edit-\' + id + \'" onclick="editJetpack(\' + id.toString() + \')">Edit</button>\' +\n' + '   }
+
+    if (withBookButton){
+        html +='    <a href="#" id="reserve_' + id + '" class="btn btn-success"">Reserve</a>\n'
+    }
+
+    return html +
         '</div>' +
         '  </div>\n' +
         '</div>';
+};
+
+getReservationsHtml = function (jetPack){
+    let html = '';
+    jetPack.bookings.forEach((reservation) => {
+        html += "Le " + jetPack.name + " a été réservé du " + reservation[0] + " au "+ reservation[1] + "\n";
+    });
+
+    return html;
 };
 
 isValidDate = function (date) {

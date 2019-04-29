@@ -6,10 +6,6 @@ context('Jetpack features', () => {
     });
 
     it('Search a Jetpack', () => {
-
-        cy.contains('Réserver').click();
-
-
         cy.get('#startDate').should('be.visible');
         cy.get('#endDate').should('be.visible');
 
@@ -42,6 +38,6 @@ context('Jetpack features', () => {
         cy.get('#endDate').type('2019-06-10');
 
         cy.contains('Rechercher').click();
-        cy.contains('Jetpack JackTalior');
+        cy.get('#jetpacksAvailable').contains('Jetpack JackTalior');
     })
 });
