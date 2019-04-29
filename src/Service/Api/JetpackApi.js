@@ -30,7 +30,7 @@ module.exports = class  {
     }
 
     editJetPack() {
-        return this.httpClient.fetch('/jetpacks', { method: 'POST' }).then(row => {
+        return this.httpClient.fetch('/jetpacks/edit', { method: 'POST' }).then(row => {
             let jetpack = new Jetpack();
             jetpack.id = row.id;
             jetpack.name = row.name;

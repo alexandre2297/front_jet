@@ -7,16 +7,14 @@ context('Jetpack features', () => {
 
     it('modify a new Jetpack', () => {
 
-        cy.get('#jetpack-form-edit-a8019ec0-bfdc-4140-9dbb-4927e5ef5c8d').should;
+        //cy.get('#card-1').should('be.visible');
 
-        const jetPack = cy.get('#jetpack-form-edit-a8019ec0-bfdc-4140-9dbb-4927e5ef5c8d');
+        cy.get('#name-modify-1').should('be.visible');
+        cy.get('#image-modify-1').should('be.visible');
+        cy.get('#name-modify-1').type('le jetpack de oufff2');
+        cy.get('#image-modify-1').type('image');
 
-        jetPack.get('#name-modify').should('be.visible');
-        jetPack.get('#image-modify').should('be.visible');
-        jetPack.get('#name-modify').type('le jetpack de oufff2');
-        jetPack.get('#image-modify').type('image');
-
-     //   cy.contains('Edit').click();
-      //  cy.contains("le jetpack de oufff2");
+        cy.get('#edit-1').click();
+        cy.contains("le jetpack de oufff2");
     })
 });

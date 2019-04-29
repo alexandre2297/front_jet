@@ -10,14 +10,14 @@ jetpackService.getJetpacks().then(jetpacks => {
     let html =  '';
     jetpacks.forEach((jetpack) => {
         html +=
-            '<div class="card" style="width: 18rem;">\n' +
-            '  <img src="'+ jetpack.image +'" class="card-img-top" alt="...">\n' +
-            '  <div id="'+jetpack.id+'" class="card-body">\n' +
-            '    <h5 class="card-title">' + jetpack.name + '</h5>\n' +
-                '<div id="jetpack-form-edit-'+jetpack.id+'">' +
-               '<label for="name"></label><input type="text" name="name" id="name-modify" />' +
-                '<label for="image"></label><input type="text" name="image" id="image-modify" />' +
-                '<button id ="edit" onclick="editJetpack('+jetpack.id.toString()+')">Edit</button>' +
+            '<div class="card-' + jetpack.id +'" style="width: 18rem;">\n' +
+        '  <img id="img-' + jetpack.id+'" src="'+ jetpack.image +'" class="card-img-top" alt="...">\n' +
+            '  <div class="card-body">\n' +
+        '    <h5 id="card-title-' + jetpack.id +'" class="card-title">' + jetpack.name + '</h5>\n' +
+                '<div id="'+jetpack.id+'">' +
+        '<label for="name"></label><input type="text" name="name" id="name-modify-' + jetpack.id +'" />' +
+        '<label for="image"></label><input type="text" name="image" id="image-modify-' + jetpack.id +'" />' +
+        '<button id ="edit-' + jetpack.id+'" onclick="editJetpack('+jetpack.id.toString()+')">Edit</button>' +
             '</div>' +
             '  </div>\n' +
             '</div>'
@@ -33,38 +33,31 @@ createJetpack = function() {
     ).then(jetpack => {
         let html = document.getElementById('jetpacks').innerHTML;
          html +=
-            '<div class="card" style="width: 18rem;">\n' +
-            '  <img src="'+ jetpack.image +'" class="card-img-top" alt="...">\n' +
-            '  <div class="card-body">\n' +
-            '    <h5 class="card-title">' + jetpack.name + '</h5>\n' +
-            '    <a href="#" class="btn btn-primary">Edit</a>\n' +
-            '  </div>\n' +
-            '</div>';
+             '<div class="card-' + jetpack.id + '" style="width: 18rem;">\n' +
+             '  <img id="img-' + jetpack.id + '" src="' + jetpack.image + '" class="card-img-top" alt="...">\n' +
+             '  <div class="card-body">\n' +
+             '    <h5 id="card-title-' + jetpack.id + '" class="card-title">' + jetpack.name + '</h5>\n' +
+             '<div id="' + jetpack.id + '">' +
+             '<label for="name"></label><input type="text" name="name" id="name-modify-' + jetpack.id + '" />' +
+             '<label for="image"></label><input type="text" name="image" id="image-modify-' + jetpack.id + '" />' +
+             '<button id ="edit-' + jetpack.id + '" onclick="editJetpack(' + jetpack.id.toString() + ')">Edit</button>' +
+             '</div>' +
+             '  </div>\n' +
+             '</div>'
 
         document.getElementById('jetpacks').innerHTML = html;
     });
 };
 
-editJetpack = function (jetPack) {
+editJetpack = function (id) {
 
-    // console.log(e.parent.className);
-    console.log(jetPack);
 
-    jetpackService.createJetPack(
-        document.getElementById('name'),
-        document.getElementById('image'),
+    jetpackService.editJetPack(id,
+        document.getElementById('name-modify-'+id),
+        document.getElementById('image-modify-' + id),
     ).then(jetpack => {
-        let html = document.getElementById('jetpacks').innerHTML;
-        html +=
-            '<div class="card" style="width: 18rem;">\n' +
-            '  <img src="'+ jetpack.image +'" class="card-img-top" alt="...">\n' +
-            '  <div class="card-body">\n' +
-            '    <h5 class="card-title">' + jetpack.name + '</h5>\n' +
-            '    <a href="#" class="btn btn-primary">Edit</a>\n' +
-            '  </div>\n' +
-            '</div>';
-
-        document.getElementById('jetpacks').innerHTML = html;
+        document.getElementById("card-title-" + id).textContent =jetpack.name
+        document.getElementById("img-" + id).src = jetpack.image
     });
 }
 
