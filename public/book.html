@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking</title>
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="index.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<h2>Book jetpack</h2>
+<div class="input-group format-date">
+    <label for="startDate">From :</label><input type="date" name="startDate" id="startDate" class="form-control-sm hide-replaced"/>
+    <label for="startEnd">To :</label><input type="date" name="endDate" id="endDate" class="form-control-sm hide-replaced"/>
+    <button type="button" onclick="search()" class="visible">Rechercher</button>
+</div>
+<div class="container" id="jetpacks Available">
+
+</div>
+</body>
+<script type="text/javascript" src="dist/bundle.js"></script>
+</html>
