@@ -113,4 +113,37 @@ describe('JetpackApi features', function () {
             fail(e);
         });
     });
+
+    test('Test Book Jetpack',() =>{
+        let httpClientMock = {
+            fetch: jest.fn()
+        };
+
+        httpClientMock.fetch.mockResolvedValue(
+            {
+                id: "1",
+                name: "le jetpack de ouf",
+                image: "base64...",
+                booking :["2019/06/05", "2019/07/03"]
+            }
+        );
+
+        expect.assertions(8);
+
+        let jetpackApi = new JetpackApi(httpClientMock);
+        jetpackApi.bookJetPack('x','y').then(
+            function (resp) {
+                expect(resp.id).toBe("1");
+                expect(resp.name).toBe("le jetpack de ouf");
+                expect(resp.image).toBe("base64...");
+                expect(Array.isArray(resp.booking)).toBe(true);
+                expect(resp.booking.length).toBe(2);
+                expect(resp.booking[0]).toEqual("2019/06/05");
+                expect(resp.booking[1]).toEqual("2019/07/03");
+                expect(resp).toBeInstanceOf(Jetpack);
+            }).catch((e) => {
+            fail(e)
+        });
+    });
+
 });

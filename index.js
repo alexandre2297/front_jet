@@ -36,10 +36,23 @@ editJetpack = function (id) {
         document.getElementById('name-modify-'+id),
         document.getElementById('image-modify-' + id),
     ).then(jetpack => {
-        document.getElementById("card-title-" + id).textContent =jetpack.name
-        document.getElementById("img-" + id).src = jetpack.image
+        document.getElementById("card-title-" + id).textContent =jetpack.name;
+        document.getElementById("img-" + id).src = jetpack.image;
     });
-}
+};
+
+bookJetPack = function (id) {
+    jetpackService.bookJetPack(id,
+        document.getElementById('startDate').value,
+        document.getElementById('endDate').value
+    ).then(jetpack => {
+        let html = document.getElementById("booking").innerHTML;
+
+        html += getReservationsHtml(jetpack);
+
+        document.getElementById("booking").innerHTML = html;
+    });
+};
 
 search = function() {
     const startDate = document.getElementById('startDate').value;
@@ -56,8 +69,7 @@ search = function() {
                 document.getElementById('jetpacksAvailable').innerHTML = "";
                 jetpacks.forEach((jetpack) => {
                     document.getElementById('jetpacksAvailable').innerHTML +=
-                        getJetPackHtml(jetpack.id, jetpack.name, jetpack.image, true, false)
-                        /*+  getReservationsHtml(jetpack)*/;
+                        getJetPackHtml(jetpack.id, jetpack.name, jetpack.image, true, false);
                 });
             });
         }else{
@@ -96,21 +108,21 @@ showElement = function(id) {
 };
 
 getJetPackHtml = function(id,name, image, withBookButton, withEditButton) {
-    let html =   '<div class="card-' + id + '" style="width: 18rem;">\n' +
+    let html =   '<div class="card" style="width: 18rem;">\n' +
         '  <img id="img-' + id + '" src="' + image + '" class="card-img-top" alt="...">\n' +
         '  <div class="card-body">\n' +
         '    <h5 id="card-title-' + id + '" class="card-title">' + name + '</h5>\n' +
-        '<div id="' + id + '">' +
-        '<label for="name"></label><input type="text" name="name" id="name-modify-' + id + '" />' +
-        '<label for="image"></label><input type="text" name="image" id="image-modify-' + id + '" />' +
+        '<div id="' + id + '">'
 
-    if (withEditButton){
-        html +=  '           \'<button id ="edit-\' + id + \'" onclick="editJetpack(\' + id.toString() + \')">Edit</button>\' +\n' + '   }
 
-    if (withBookButton){
-        html +='    <a href="#" id="reserve_' + id + '" class="btn btn-success"">Reserve</a>\n'
+    if (withEditButton) {
+        html +=  '<label for="name"></label><input type="text" name="name" id="name-modify-' + id + '" />' +
+            '<label for="image"></label><input type="text" name="image" id="image-modify-' + id + '" />' +
+            '<button id ="edit-' + id + '" onclick="editJetpack(' + id.toString() + ')">Edit</button>';
     }
-
+    if (withBookButton){
+        html +='<button onclick="bookJetPack(' + id.toString() + ')" id="reserve-' + id + '" class="btn btn-success"">Reserve</button>';
+    }
     return html +
         '</div>' +
         '  </div>\n' +
@@ -118,12 +130,7 @@ getJetPackHtml = function(id,name, image, withBookButton, withEditButton) {
 };
 
 getReservationsHtml = function (jetPack){
-    let html = '';
-    jetPack.bookings.forEach((reservation) => {
-        html += "Le " + jetPack.name + " a été réservé du " + reservation[0] + " au "+ reservation[1] + "\n";
-    });
-
-    return html;
+    return  "<p>Le " + jetPack.name + " a été réservé du " + jetPack.booking[0] + " au "+ jetPack.booking[1] + "\n</p>";
 };
 
 isValidDate = function (date) {

@@ -1,9 +1,9 @@
 module.exports = class  {
     constructor() {
-        this._id     = null;
-        this._name   = null;
-        this._image  = null;
-        this.bookings = [];
+        this._id      = null;
+        this._name    = null;
+        this._image   = null;
+        this._booking = null;
     }
 
     get id() {
@@ -30,7 +30,11 @@ module.exports = class  {
         this._image = value;
     }
 
-    addBooking(startDate, endDate){
-        this.bookings.push([startDate, endDate]);
+    get booking() {
+        return this._booking
+    }
+
+    set booking(value){
+        this._booking = value
     }
 };

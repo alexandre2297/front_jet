@@ -5,7 +5,7 @@ context('Jetpack features', () => {
         cy.visit('/')
     });
 
-    it('Search a Jetpack', () => {
+    it('Search and Book Jetpack', () => {
         cy.get('#startDate').should('be.visible');
         cy.get('#endDate').should('be.visible');
 
@@ -39,5 +39,8 @@ context('Jetpack features', () => {
 
         cy.contains('Rechercher').click();
         cy.get('#jetpacksAvailable').contains('Jetpack JackTalior');
+
+        cy.get("#reserve-1").click();
+        cy.contains("Le Jetpack JackTalior a été réservé du 2019/06/05 au 2019/07/03");
     })
 });
