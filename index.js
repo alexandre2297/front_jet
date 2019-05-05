@@ -112,7 +112,7 @@ getJetPackHtml = function(id,name, image, withBookButton, withEditButton) {
         '  <img id="img-' + id + '" src="' + image + '" class="card-img-top" alt="...">\n' +
         '  <div class="card-body">\n' +
         '    <h5 id="card-title-' + id + '" class="card-title">' + name + '</h5>\n' +
-        '<div id="' + id + '">'
+        '<div id="' + id + '">';
 
 
     if (withEditButton) {
@@ -139,9 +139,5 @@ isValidDate = function (date) {
 };
 
 isValidDates = function (startDate, endDate) {
-    const today  = new Date();
-    const startD = new Date(startDate);
-    const endD   = new Date(endDate);
-
-    return startD >= today && startD <= endD;
+    return new Date(startDate) <= new Date(endDate);
 };
