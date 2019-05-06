@@ -9,9 +9,9 @@ module.exports = class  {
 
             return rows.map(row => {
                 let jetpack = new Jetpack();
-                jetpack.id      = row.id;
-                jetpack.name    = row.name;
-                jetpack.image   = row.image;
+                jetpack.id = row.id;
+                jetpack.name = row.name;
+                jetpack.image = row.image;
 
                 return jetpack
             });
@@ -22,7 +22,10 @@ module.exports = class  {
         return this.httpClient.fetch('/jetpacks',
             {
                 method: 'POST',
-                body: JSON.stringify({name: name, image: image})
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: "name=" + name + "&image=" + image
             }
 
         ).then(row => {
@@ -38,7 +41,11 @@ module.exports = class  {
     editJetPack(id, name, image) {
         return this.httpClient.fetch('/jetpacks/edit', {
             method: 'POST',
-            body: JSON.stringify({id:id, name: name, image: image})
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: "id=" + id + "&name=" + name + "&image=" + image
+
         }).then(row => {
             let jetpack = new Jetpack();
             jetpack.id = row.id;
@@ -53,7 +60,10 @@ module.exports = class  {
         return this.httpClient.fetch('/jetpacks/search',
             {
                 method: 'POST',
-                body: JSON.stringify({startDate: startDate, endDate: endDate})
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: "startDate=" + startDate + "&endDate=" + endDate
             }
 
         ).then(rows => {
@@ -72,7 +82,10 @@ module.exports = class  {
     bookJetPack (id, startDate, endDate){
         return this.httpClient.fetch('/jetpacks/book', {
             method: 'POST',
-            body: JSON.stringify({id:id, startDate: startDate, endDate: endDate})
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: "id=" + id + "&startDate=" + startDate + "&endDate=" + endDate
         }).then(row => {
             let jetpack = new Jetpack();
             jetpack.id = row.id;

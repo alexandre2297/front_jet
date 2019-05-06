@@ -6,6 +6,11 @@ module.exports = function(config) {
     testRunner: "jest",
     transpilers: [],
     coverageAnalysis: "off",
+    files: [
+      'src/**/*.js',
+    //  './src/Api/JetpackApi.js'
+      '!./src/HttpClient.js'
+    ],
     thresholds: {
       break: 50
       // ..
