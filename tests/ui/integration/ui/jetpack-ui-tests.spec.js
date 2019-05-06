@@ -13,7 +13,7 @@ context('Jetpack features', () => {
             cy.contains(jetPackName);
     }
 
-    beforeEach(() => {
+    before(() => {
         cy.visit('/');
 
         //Create a jetpack before each test to make sure that there is always at least one jetpack
@@ -35,7 +35,7 @@ context('Jetpack features', () => {
 
         cy.get('@jetpack').get('input[name="name"]').should('be.visible');
         cy.get('@jetpack').get('input[name="image"]').should('be.visible');
-        cy.get('@jetpack').find('input[name="name"]').type('le jetpack de oufff2', { force: true });
+        cy.get('@jetpack').find('input[name="name"]').type('le jetpack de oufff2');
         cy.get('@jetpack').find('input[name="image"]').type('https://cf3.s3.souqcdn.com/item/2018/09/17/38/59/98/79/item_XL_38599879_150537095.jpg');
 
         cy.get('@jetpack').contains('Edit').click();

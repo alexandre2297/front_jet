@@ -125,7 +125,7 @@ getJetPackHtml = function(id,name, image, withBookButton, withEditButton) {
             <button id ="edit-${id}" onclick="editJetpack('${id}')">Edit</button>`;
     }
     if (withBookButton){
-        html +='<button onclick="bookJetPack(' + id.toString() + ')" id="reserve-' + id + '" class="btn btn-success"">Reserve</button>';
+        html += `<button onclick="bookJetPack('${id}')" id="reserve-${id}" class="btn btn-success">Reserve</button>`;
     }
     return html +
         '</div>' +
