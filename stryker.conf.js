@@ -6,9 +6,9 @@ module.exports = function(config) {
     testRunner: "jest",
     transpilers: [],
     coverageAnalysis: "off",
-    thresholds: {
-      break: 50
-      // ..
-    }
+    files: [
+      'src/**/*.js',
+      '!./src/HttpClient.js' //Mutation tests not necessary for this file
+    ]
   });
 };

@@ -22,3 +22,6 @@
 `npm run unit.test.mutation`
 ## UI tests
 `npm run ui.test`
+
+#To link the Back-end, change the url in app.config.js to :
+apiUrl : "http://localhost:3000"

@@ -32,12 +32,16 @@ createJetpack = function() {
 };
 
 editJetpack = function (id) {
+    console.log(id);
     jetpackService.editJetPack(id,
-        document.getElementById('name-modify-'+id),
-        document.getElementById('image-modify-' + id),
+        document.getElementById('name-modify-'+id).value,
+        document.getElementById('image-modify-' + id).value,
     ).then(jetpack => {
         document.getElementById("card-title-" + id).textContent =jetpack.name;
         document.getElementById("img-" + id).src = jetpack.image;
+
+        document.getElementById('name-modify-'+id).value = ""
+        document.getElementById('image-modify-' + id).value = ""
     });
 };
 
@@ -116,12 +120,12 @@ getJetPackHtml = function(id,name, image, withBookButton, withEditButton) {
 
 
     if (withEditButton) {
-        html +=  '<label for="name"></label><input type="text" name="name" id="name-modify-' + id + '" />' +
-            '<label for="image"></label><input type="text" name="image" id="image-modify-' + id + '" />' +
-            '<button id ="edit-' + id + '" onclick="editJetpack(' + id.toString() + ')">Edit</button>';
+        html +=  `<label for="name"></label><input type="text" name="name" id="name-modify-${id}" />
+            <label for="image"></label><input type="text" name="image" id="image-modify-${id}" />
+            <button id ="edit-${id}" onclick="editJetpack('${id}')">Edit</button>`;
     }
     if (withBookButton){
-        html +='<button onclick="bookJetPack(' + id.toString() + ')" id="reserve-' + id + '" class="btn btn-success"">Reserve</button>';
+        html += `<button onclick="bookJetPack('${id}')" id="reserve-${id}" class="btn btn-success">Reserve</button>`;
     }
     return html +
         '</div>' +
@@ -130,7 +134,7 @@ getJetPackHtml = function(id,name, image, withBookButton, withEditButton) {
 };
 
 getReservationsHtml = function (jetPack){
-    return  "<p>Le " + jetPack.name + " a été réservé du " + jetPack.booking[0] + " au "+ jetPack.booking[1] + "\n</p>";
+    return  jetPack.name + " a été réservé du " + jetPack.booking[0] + " au "+ jetPack.booking[1] + "\n</p>";
 };
 
 isValidDate = function (date) {
