@@ -134,7 +134,7 @@ getJetPackHtml = function(id,name, image, withBookButton, withEditButton) {
 };
 
 getReservationsHtml = function (jetPack){
-    return  "<p>Le " + jetPack.name + " a été réservé du " + jetPack.booking[0] + " au "+ jetPack.booking[1] + "\n</p>";
+    return  jetPack.name + " a été réservé du " + jetPack.booking[0] + " au "+ jetPack.booking[1] + "\n</p>";
 };
 
 isValidDate = function (date) {

@@ -41,9 +41,7 @@ describe('JetpackApi features', function () {
 
         let jetpackApi = new JetpackApi(httpClientMock);
 
-
-
-        const toto = jetpackApi.getJetpacks().then(resp => {
+       jetpackApi.getJetpacks().then(resp => {
             expect(Array.isArray(resp)).toBe(true);
             expect(resp.length).toBe(1);
             expect(resp[0].id).toBe("123");

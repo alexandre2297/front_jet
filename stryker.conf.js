@@ -8,12 +8,7 @@ module.exports = function(config) {
     coverageAnalysis: "off",
     files: [
       'src/**/*.js',
-    //  './src/Api/JetpackApi.js'
-      '!./src/HttpClient.js'
-    ],
-    thresholds: {
-      break: 50
-      // ..
-    }
+      '!./src/HttpClient.js' //Mutation tests not necessary for this file
+    ]
   });
 };

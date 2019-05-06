@@ -15,6 +15,8 @@ context('Jetpack features', () => {
 
     beforeEach(() => {
         cy.visit('/');
+
+        //Create a jetpack before each test to make sure that there is always at least one jetpack
         createJetPack('Mon Jetpack','https://gamewave.fr/static/images/news/headers/2600a-jetpack.jpg');
     });
 
@@ -33,7 +35,7 @@ context('Jetpack features', () => {
 
         cy.get('@jetpack').get('input[name="name"]').should('be.visible');
         cy.get('@jetpack').get('input[name="image"]').should('be.visible');
-        cy.get('@jetpack').find('input[name="name"]').type('le jetpack de oufff2');
+        cy.get('@jetpack').find('input[name="name"]').type('le jetpack de oufff2', { force: true });
         cy.get('@jetpack').find('input[name="image"]').type('https://cf3.s3.souqcdn.com/item/2018/09/17/38/59/98/79/item_XL_38599879_150537095.jpg');
 
         cy.get('@jetpack').contains('Edit').click();
@@ -76,6 +78,6 @@ context('Jetpack features', () => {
         cy.get('#jetpacksAvailable').contains('Mon Jetpack');
 
         cy.get("#reserve-1").click();
-        cy.contains("Le Jetpack Mon Jetpack a été réservé du 2019/06/05 au 2019/07/03");
+        cy.contains("Mon Jetpack a été réservé du 2019/06/05 au 2019/07/03");
     });
 });
